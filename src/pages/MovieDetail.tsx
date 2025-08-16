@@ -30,8 +30,6 @@ export default function MovieDetail() {
   if (detailQ.isLoading || creditsQ.isLoading) return <Loader />;
   if (detailQ.isError || creditsQ.isError) return <ErrorMessage />;
 
-  console.log("Movie Detail:", creditsQ.data);
-
   const movie = detailQ.data;
   const directors = creditsQ.data.crew
     .filter((c: any) => c.job === "Director")

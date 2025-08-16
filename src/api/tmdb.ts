@@ -1,9 +1,7 @@
 import axios from "axios";
 import { Movie, MovieCategory, MovieCredits } from "../types/movie";
 import { APIResponseMovieList } from "../types/api-response";
-
-const API_KEY = import.meta.env.VITE_TMDB_API_KEY as string | undefined;
-const BEARER = import.meta.env.VITE_TMDB_BEARER as string | undefined;
+import { API_KEY, BEARER } from "../helpers/config";
 
 export const client = axios.create({
   baseURL: "https://api.themoviedb.org/3",

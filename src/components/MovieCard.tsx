@@ -1,36 +1,10 @@
 import { Link } from "react-router-dom";
 import { imageUrl } from "../api/tmdb";
-import type { Movie } from "../types";
-import { useQueryClient } from "@tanstack/react-query";
-import { fetchMovieDetail } from "../api/tmdb";
-import { useRef } from "react";
+import { Movie } from "../types/movie";
 
 export default function MovieCard({ movie }: { movie: Movie }) {
-  const qc = useQueryClient();
-  const tRef = useRef<number | null>(null);
-
-  const handleEnter = () => {
-    tRef.current = window.setTimeout(() => {
-      qc.prefetchQuery({
-        queryKey: ["movie", movie.id],
-        queryFn: () => fetchMovieDetail(movie.id),
-        staleTime: 1000 * 60 * 5, // 5 Minutes
-      });
-    }, 300);
-  };
-  const handleLeave = () => {
-    if (tRef.current) {
-      clearTimeout(tRef.current);
-      tRef.current = null;
-    }
-  };
-
   return (
-    <div
-      className="overflow-hidden card"
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
-    >
+    <div className="overflow-hidden card">
       <Link to={`/movie/${movie.id}`} className="block">
         {movie.poster_path ? (
           <img

@@ -7,7 +7,6 @@ import ErrorMessage from "../components/ErrorMessage";
 import Loader from "../components/Loader";
 import NotFound from "../components/NotFound";
 import Pagination from "../components/Pagination";
-import { fetchMovies } from "../api/tmdb";
 
 export default function MovieList() {
   const { category, query, page, setCategory, setQuery, setPage } =
