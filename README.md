@@ -1,7 +1,7 @@
 # TMDB Vite React Query Zustand (with CI & Tests)
 
 Stack:
-- React 19 + Vite + TypeScript
+- React 18 + Vite + TypeScript
 - Tailwind CSS (utility styling)
 - React Query for fetching & caching (with prefetch on hover)
 - Zustand for UI state (category, query, page)
