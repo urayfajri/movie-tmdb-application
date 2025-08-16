@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchMovieDetail, fetchMovieCredits, imageUrl } from "../api/tmdb";
+import ErrorMessage from "../components/ErrorMessage";
+import Loader from "../components/Loader";
 
 export default function MovieDetail() {
   const { id } = useParams<{ id: string }>();
@@ -24,10 +26,8 @@ export default function MovieDetail() {
     enabled: !!movieId,
   });
 
-  if (detailQ.isLoading || creditsQ.isLoading)
-    return <div className="p-4">Loading...</div>;
-  if (detailQ.isError || creditsQ.isError)
-    return <div className="p-4 text-red-400">Failed to load</div>;
+  if (detailQ.isLoading || creditsQ.isLoading) return <Loader />;
+  if (detailQ.isError || creditsQ.isError) return <ErrorMessage />;
 
   console.log("Movie Detail:", creditsQ.data);
 
