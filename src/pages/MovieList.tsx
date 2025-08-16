@@ -6,9 +6,11 @@ import { Movie } from "../types/movie";
 import ErrorMessage from "../components/ErrorMessage";
 import Loader from "../components/Loader";
 import NotFound from "../components/NotFound";
+import Pagination from "../components/Pagination";
+import { fetchMovies } from "../api/tmdb";
 
 export default function MovieList() {
-  const { category, query, page, setCategory, setQuery, nextPage } =
+  const { category, query, page, setCategory, setQuery, setPage } =
     useUIMovieStore();
   const [debouncedQuery, setDebouncedQuery] = useState(query);
   const [isDebouncing, setIsDebouncing] = useState(false);
@@ -79,15 +81,13 @@ export default function MovieList() {
                 <MovieCard key={m.id} movie={m} />
               ))}
             </div>
-            <div className="mt-6 text-center">
-              {data.page < data.total_pages ? (
-                <button className="btn" onClick={() => nextPage()}>
-                  Load More
-                </button>
-              ) : (
-                <div className="opacity-70">End of list</div>
-              )}
-            </div>
+
+            {/* Pagination */}
+            <Pagination
+              currentPage={data.page}
+              totalPages={data.total_pages}
+              onPageChange={(page) => setPage(page)}
+            />
           </>
         ) : (
           <NotFound message="No movies found" />
