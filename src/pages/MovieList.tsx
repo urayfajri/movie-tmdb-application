@@ -81,7 +81,6 @@ export default function MovieList() {
               ))}
             </div>
 
-            {/* Pagination */}
             <Pagination
               currentPage={data.page}
               totalPages={data.total_pages}
