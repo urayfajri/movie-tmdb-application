@@ -71,11 +71,6 @@ export default function MovieList() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-        {data?.results?.map((m: Movie) => (
-          <MovieCard key={m.id} movie={m} />
-        ))}
-      </div>
       <div className="mt-6 text-center">
         {data?.results && data.results.length > 0 ? (
           <>
