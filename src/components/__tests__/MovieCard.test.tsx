@@ -34,7 +34,9 @@ const mockMovie: Movie = {
 describe("MovieCard", () => {
   it("renders movie title and release year", () => {
     render(
-      <MemoryRouter future={{ v7_startTransition: true }}>
+      <MemoryRouter
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      >
         <MovieCard movie={mockMovie} />
       </MemoryRouter>
     );
@@ -48,7 +50,9 @@ describe("MovieCard", () => {
 
   it("renders poster image when poster_path exists", () => {
     render(
-      <MemoryRouter future={{ v7_startTransition: true }}>
+      <MemoryRouter
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      >
         <MovieCard movie={mockMovie} />
       </MemoryRouter>
     );
@@ -61,7 +65,9 @@ describe("MovieCard", () => {
     const movieWithoutPoster = { ...mockMovie, poster_path: null };
 
     render(
-      <MemoryRouter future={{ v7_startTransition: true }}>
+      <MemoryRouter
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      >
         <MovieCard movie={movieWithoutPoster as Movie} />
       </MemoryRouter>
     );
@@ -71,7 +77,9 @@ describe("MovieCard", () => {
 
   it("links to movie detail page", () => {
     render(
-      <MemoryRouter future={{ v7_startTransition: true }}>
+      <MemoryRouter
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      >
         <MovieCard movie={mockMovie} />
       </MemoryRouter>
     );

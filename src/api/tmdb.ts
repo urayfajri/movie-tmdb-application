@@ -1,7 +1,5 @@
-import axios from "axios";
 import { Movie, MovieCategory, MovieCredits } from "../types/movie";
 import { APIResponseMovieList } from "../types/api-response";
-import { client } from "../helpers/config";
 import { get } from "../helpers/params";
 
 export const imageUrl = (

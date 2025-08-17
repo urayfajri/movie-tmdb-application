@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import MovieList from "./pages/MovieList";
 import MovieDetail from "./pages/MovieDetail";
 import Header from "./components/Header";
@@ -8,10 +8,7 @@ export default function App() {
   return (
     <div className="container py-6">
       <Header />
-      <Routes>
-        <Route path="/" element={<MovieList />} />
-        <Route path="/movie/:id" element={<MovieDetail />} />
-      </Routes>
+      <Outlet />
       <Footer />
     </div>
   );
