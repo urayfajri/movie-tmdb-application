@@ -5,7 +5,7 @@ export default function Loader({
   message?: string;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center h-full min-h-[200px]">
+    <div className="flex flex-col items-center justify-center h-full min-h-[600px]">
       {/* Spinner */}
       <div
         role="status"

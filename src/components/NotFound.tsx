@@ -9,6 +9,7 @@ export default function NotFound({
       <svg
         className="w-20 h-20 mb-4 text-gray-300"
         fill="none"
+        role="img"
         stroke="currentColor"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
