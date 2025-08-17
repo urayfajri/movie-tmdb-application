@@ -1,3 +1,4 @@
+import { test } from "@jest/globals";
 // components/Loader.tsx
 export default function Loader({
   message = "Loading...",
@@ -10,6 +11,7 @@ export default function Loader({
       <div
         role="status"
         aria-label="loading"
+        data-testid="loader"
         className="w-12 h-12 mb-4 border-4 border-gray-300 rounded-full border-t-blue-500 animate-spin"
       ></div>
       {/* Optional message */}
