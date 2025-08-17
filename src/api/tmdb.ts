@@ -1,52 +1,25 @@
 import axios from "axios";
 import { Movie, MovieCategory, MovieCredits } from "../types/movie";
 import { APIResponseMovieList } from "../types/api-response";
-import { API_KEY, BEARER } from "../helpers/config";
-
-export const client = axios.create({
-  baseURL: "https://api.themoviedb.org/3",
-  headers: BEARER ? { Authorization: `Bearer ${BEARER}` } : undefined,
-  params: BEARER ? {} : { api_key: API_KEY },
-});
-
-client.interceptors.request.use((config) => {
-  config.params = {
-    language: "en-US",
-    include_adult: false,
-    ...(config.params || {}),
-  };
-  return config;
-});
+import { client } from "../helpers/config";
+import { get } from "../helpers/params";
 
 export const imageUrl = (
   path?: string | null,
   size: "w500" | "original" = "w500"
 ) => (path ? `https://image.tmdb.org/t/p/${size}${path}` : undefined);
 
-export async function fetchMovies(
-  category: MovieCategory,
-  page = 1
-): Promise<APIResponseMovieList<Movie>> {
-  const { data } = await client.get<APIResponseMovieList<Movie>>(
-    `/movie/${category}`,
-    { params: { page } }
-  );
-  return data;
-}
+// Fetch movies by category
+export const fetchMovies = (category: MovieCategory, page = 1) =>
+  get<APIResponseMovieList<Movie>>(`/movie/${category}`, { page });
 
-export async function fetchMovieDetail(id: number): Promise<Movie> {
-  const { data } = await client.get<Movie>(`/movie/${id}`);
-  return data;
-}
+// Fetch single movie detail
+export const fetchMovieDetail = (id: number) => get<Movie>(`/movie/${id}`);
 
-export async function fetchMovieCredits(id: number): Promise<MovieCredits> {
-  const { data } = await client.get<MovieCredits>(`/movie/${id}/credits`);
-  return data;
-}
+// Fetch movie credits (cast & crew)
+export const fetchMovieCredits = (id: number) =>
+  get<MovieCredits>(`/movie/${id}/credits`);
 
-export async function searchMovies(query: string, page = 1) {
-  const { data } = await client.get(`/search/movie`, {
-    params: { query, page },
-  });
-  return data;
-}
+// Search movies by query
+export const searchMovies = (query: string, page = 1) =>
+  get<APIResponseMovieList<Movie>>(`/search/movie`, { query, page });

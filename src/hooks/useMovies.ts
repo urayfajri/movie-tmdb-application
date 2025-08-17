@@ -22,14 +22,3 @@ export function useMovies(
     placeholderData: keepPreviousData,
   });
 }
-
-export function usePrefetchMovie(id: number) {
-  const qc = useQueryClient();
-  return (delay = 300) => {
-    qc.prefetchQuery({
-      queryKey: ["movie", id],
-      queryFn: () => fetchMovieDetail(id),
-      staleTime: 1000 * 60 * 5,
-    });
-  };
-}

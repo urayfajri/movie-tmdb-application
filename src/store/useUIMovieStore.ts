@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { Movie, MovieCategory } from "../types/movie";
 
 type UIMovieState = {
@@ -16,7 +16,7 @@ export const useUIMovieStore = create<UIMovieState>((set) => ({
   results: [],
   query: "",
   page: 1,
-  setCategory: (c) => set({ category: c, page: 1 }),
+  setCategory: (c) => set({ category: c, page: 1, query: "" }),
   setQuery: (q) => set({ query: q, page: 1 }),
   setPage: (p) => set({ page: p }),
 }));

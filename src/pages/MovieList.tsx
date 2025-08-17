@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useUIMovieStore } from "../store/useUIMovieStore";
 import { useMovies } from "../hooks/useMovies";
 import MovieCard from "../components/MovieCard";
@@ -7,6 +7,7 @@ import ErrorMessage from "../components/ErrorMessage";
 import Loader from "../components/Loader";
 import NotFound from "../components/NotFound";
 import Pagination from "../components/Pagination";
+import { movieCategories } from "../helpers/movie";
 
 export default function MovieList() {
   const { category, query, page, setCategory, setQuery, setPage } =
@@ -14,13 +15,13 @@ export default function MovieList() {
   const [debouncedQuery, setDebouncedQuery] = useState(query);
   const [isDebouncing, setIsDebouncing] = useState(false);
 
-  // Debounce query: update after 2 seconds idle
+  // Debounce query: update after 1 seconds idle
   useEffect(() => {
     setIsDebouncing(true);
     const timer = setTimeout(() => {
       setDebouncedQuery(query);
       setIsDebouncing(false);
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(timer);
   }, [query]);
 
@@ -54,21 +55,19 @@ export default function MovieList() {
           <div className="flex items-center w-full text-sm font-medium text-gray-500 sm:w-auto">
             <span className="text-gray-500 ">Filter by Category:</span>
           </div>
-          {(["now_playing", "popular", "top_rated", "upcoming"] as const).map(
-            (c) => (
-              <button
-                key={c}
-                onClick={() => setCategory(c)}
-                className={`px-4 py-2 rounded font-medium ${
-                  category === c
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-700 text-gray-200 hover:bg-gray-600"
-                }`}
-              >
-                {c.replace("_", " ")}
-              </button>
-            )
-          )}
+          {movieCategories.map((c) => (
+            <button
+              key={c}
+              onClick={() => setCategory(c)}
+              className={`px-4 py-2 rounded font-medium ${
+                category === c
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-700 text-gray-200 hover:bg-gray-600"
+              }`}
+            >
+              {c.replace("_", " ")}
+            </button>
+          ))}
         </div>
       </div>
 
